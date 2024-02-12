@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 public class Parsing {
   public static void process(String input) throws Exception {
     // делим входную строку на числа
@@ -9,12 +11,11 @@ public class Parsing {
     //Проверяем, что у нас всего два операнда
     if (num.length != 2) throw new Exception("Должно быть два операнда.");
 
-    String operation = detectOperation(input);
+    String operator;
+    operator = detectOperation(input);
 
     // Проверяем какие это числа (арабские или  римские)
-    int num1 = 0;
-    int num2 = 0;
-    int flag = 0; //Флаг указывает какие конкретно. 0 арабские. 1 римские.
+    int num1, num2, flag = 0; //Флаг указывает какие конкретно. 0 арабские. 1 римские.
     try {
       num1 = Integer.parseInt(num[0]);
       num2 = Integer.parseInt(num[1]);
@@ -29,15 +30,16 @@ public class Parsing {
         flag = 1;
       }
 
-      if (num1 <= num2 && operation == "-") {
+      if (num1 <= num2 && Objects.equals(operator, "-")) {
         throw new Exception("В римской системе нет отрицательных чисел.");
       }
 
     }
 
-    if ((num1 > 0 || num1 < 11) || (num2 < 11 || num2 > 0)) {
+    if ((num1 > 10 || num1 < 0) || (num2 < 0 || num2 > 11)) {
       // Отправляем полученные  данные для вычислений и вывода результата
-      CalcAndOutput.calculator(num1, num2, operation, flag);
+      assert operator != null;
+      CalcAndOutput.calculator(num1, num2, operator, flag);
     } else {
       throw new Exception("По условию входные данные могут быть только от 1 до 10 включительно.");
     }
