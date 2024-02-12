@@ -1,6 +1,6 @@
 public class CalcAndOutput {
   public static void calculator(int num1, int num2,String operation, int flag) throws Exception {
-    float result = 0;
+    int result = 0;
 
     switch (operation) {
       case "+":
@@ -19,8 +19,13 @@ public class CalcAndOutput {
     if (flag == 0) {
       System.out.println(result);
     } else {
-      String s = RomanNumeral.arabicToRoman(Math.round(result));
+      if (result < 1) {
+        throw new Exception("В римской системе чисела только положительные.");
+      } else {
+      String s = RomanNumeral.arabicToRoman(result);
       System.out.println(s);
+      }
     }
+
   }
 }

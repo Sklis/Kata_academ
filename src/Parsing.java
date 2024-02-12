@@ -29,7 +29,7 @@ public class Parsing {
         flag = 1;
       }
 
-      if (num1 < num2 && operation == "-") {
+      if (num1 <= num2 && operation == "-") {
         throw new Exception("В римской системе нет отрицательных чисел.");
       }
 
