@@ -1,6 +1,6 @@
 public class CalcAndOutput {
   public static void calculator(int num1, int num2,String operation, int flag) throws Exception {
-    int result = 0;
+    float result = 0;
 
     switch (operation) {
       case "+":
@@ -19,7 +19,7 @@ public class CalcAndOutput {
     if (flag == 0) {
       System.out.println(result);
     } else {
-      String s = RomanNumeral.arabicToRoman(result);
+      String s = RomanNumeral.arabicToRoman(Math.round(result));
       System.out.println(s);
     }
   }
