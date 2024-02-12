@@ -21,7 +21,7 @@ public class Input {
     String expr = input.nextLine();
     expr = expr.toUpperCase();
 
-    if (expr == "Y") {
+    if (expr.equals("Y")) {
       entrance();
     } else {
       System.exit(0);
