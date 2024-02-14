@@ -36,7 +36,7 @@ public class Parsing {
 
     }
 
-    if ((num1 > 10 || num1 < 0) || (num2 < 0 || num2 > 11)) {
+    if ((num1 > 10 && num1 < 0) || (num2 < 0 && num2 > 10)) {
       // Отправляем полученные  данные для вычислений и вывода результата
       assert operator != null;
       CalcAndOutput.calculator(num1, num2, operator, flag);
