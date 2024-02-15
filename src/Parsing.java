@@ -6,7 +6,7 @@ public class Parsing {
   private static int flag = 0; //Флаг указывает какие конкретно. 0 арабские. 1 римские.
   private static String operator;
 
-  public static void process(String input) throws Exception {
+  public static void process(String input) {
     // делим входную строку на числа
     String[] num = input.split("[+\\-/*]");
     for (int i = 0; i < num.length; i++) {
