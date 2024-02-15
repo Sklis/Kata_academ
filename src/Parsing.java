@@ -63,7 +63,6 @@ public class Parsing {
     if (flag == 1 && ((num1 < num2) && Objects.equals(operator, "-"))) {
         System.out.println("В римской системе нет отрицательных чисел.");
         System.exit(0);
-
     }
   }
 }
