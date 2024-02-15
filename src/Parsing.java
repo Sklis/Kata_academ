@@ -1,6 +1,11 @@
 import java.util.Objects;
 
 public class Parsing {
+  private static int num1;
+  private static int num2;
+  private static int flag = 0; //Флаг указывает какие конкретно. 0 арабские. 1 римские.
+  private static String operator;
+
   public static void process(String input) throws Exception {
     // делим входную строку на числа
     String[] num = input.split("[+\\-/*]");
@@ -9,43 +14,30 @@ public class Parsing {
     }
 
     //Проверяем, что у нас всего два операнда
-    if (num.length != 2) throw new Exception("Должно быть два операнда.");
+    if (num.length != 2) {
+      System.out.println("Должно быть два операнда.");
+      System.exit(0);
+    }
 
-    String operator;
     operator = detectOperation(input);
 
     // Проверяем какие это числа (арабские или  римские)
-    int num1, num2, flag = 0; //Флаг указывает какие конкретно. 0 арабские. 1 римские.
     try {
       num1 = Integer.parseInt(num[0]);
       num2 = Integer.parseInt(num[1]);
+      variationNumbers();
     } catch (NumberFormatException e) {
-      if (num[0].matches("[IVXLCD]") && num[1].matches("[0-9]")) {
-        throw new Exception("Не допустимое выражение.");
-      } else if (num[0].matches("[0-9]") && num[1].matches("[IVXLCD]")) {
-        throw new Exception("Не допустимое выражение.");
-      } else {
-        num1 = RomanNumeral.romanToArabic(num[0]);
-        num2 = RomanNumeral.romanToArabic(num[1]);
-        flag = 1;
-      }
-
-      if (num1 <= num2 && Objects.equals(operator, "-")) {
-        throw new Exception("В римской системе нет отрицательных чисел.");
-      }
-
+      flag = 1;
+      variationExpression(num);
+      num1 = RomanNumeral.romanToArabic(num[0]);
+      num2 = RomanNumeral.romanToArabic(num[1]);
+      variationNumbers();
     }
 
-    if ((num1 > 10 || num1 < 0) || (num2 < 0 || num2 > 11)) {
-      // Отправляем полученные  данные для вычислений и вывода результата
-      assert operator != null;
-      CalcAndOutput.calculator(num1, num2, operator, flag);
-    } else {
-      throw new Exception("По условию входные данные могут быть только от 1 до 10 включительно.");
-    }
+    CalcAndOutput.calculator(num1, num2, operator, flag);
   }
 
-  static String detectOperation(String input) {
+  private static String detectOperation(String input) {
     if (input.contains("+")) return "+";
     if (input.contains("-")) return "-";
     if (input.contains("*")) return "*";
@@ -53,4 +45,25 @@ public class Parsing {
     return null;
   }
 
+  private static void variationExpression(String[] num) {
+    boolean b = num[0].matches("[0-9]") && num[1].matches("[IVXLCD]");
+    boolean a = num[0].matches("[IVXLCD]") && num[1].matches("[0-9]");
+    if (a || b) {
+      System.out.println("Не допустимое выражение.");
+      System.exit(0);
+    }
+
+  }
+
+  private static void variationNumbers() {
+    if (num1 < 1 || num1 > 10 || num2 < 1 || num2 > 10) {
+      System.out.println("Числа только от 1 до 10.");
+      System.exit(0);
+    }
+    if (flag == 1 && ((num1 < num2) && Objects.equals(operator, "-"))) {
+        System.out.println("В римской системе нет отрицательных чисел.");
+        System.exit(0);
+
+    }
+  }
 }
