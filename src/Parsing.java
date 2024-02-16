@@ -47,10 +47,8 @@ public class Parsing {
   private static void variationExpression(String[] num) throws Exception {
     boolean b = num[0].matches("[0-9]") && num[1].matches("[IVXLCD]");
     boolean a = num[0].matches("[IVXLCD]") && num[1].matches("[0-9]");
-    if (a || b) {
-      throw new Exception("Не допустимое выражение.");
-    }
 
+    if (a || b) throw new Exception("Не допустимое выражение.");
   }
 
   private static void variationNumbers() throws Exception {
