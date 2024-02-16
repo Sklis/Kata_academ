@@ -11,7 +11,7 @@ public enum RomanNumeral {
     return value;
   }
 
-  public static String arabicToRoman(int arabic) {
+  public static String arabicToRoman(int arabic) throws IllegalArgumentException {
     if (arabic <= 0 || arabic > 3999) {
       throw new IllegalArgumentException("Значение должно быть в диапазоне от 1 до 3999");
     }
@@ -36,11 +36,9 @@ public enum RomanNumeral {
       char currentSymbol = roman.charAt(i);
       RomanNumeral currentNumeral = valueOf(String.valueOf(currentSymbol));
 
-      if (currentNumeral.getValue() < prev) {
-        result -= currentNumeral.getValue();
-      } else {
-        result += currentNumeral.getValue();
-      }
+      if (currentNumeral.getValue() < prev) result -= currentNumeral.getValue();
+      else  result += currentNumeral.getValue();
+
       prev = currentNumeral.getValue();
     }
 

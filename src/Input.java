@@ -7,7 +7,7 @@ public class Input {
     String expr = input.nextLine();
 
     if (!expr.matches("[0-9+\\-*/IiVvXxLlCcDd]+")) {
-      throw new Exception("Введено недопустимое выражение. Используйте только арабские цифры, римские цифры и знаки операций (+, -, *, /).");
+      throw new Exception("Используйте только арабские цифры, римские цифры и знаки операций (+, -, *, /).");
     }
 
     expr = expr.toUpperCase();

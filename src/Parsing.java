@@ -55,6 +55,7 @@ public class Parsing {
     if (num1 < 1 || num1 > 10 || num2 < 1 || num2 > 10) {
       throw new Exception("Числа только от 1 до 10.");
     }
+
     if (flag == 1 && ((num1 < num2) && Objects.equals(operator, "-"))) {
       throw new Exception("В римской системе нет отрицательных чисел.");
     }

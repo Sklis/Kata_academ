@@ -19,6 +19,5 @@ public class CalcAndOutput {
     } else {
       System.out.println(result);
     }
-
   }
 }
