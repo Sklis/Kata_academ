@@ -6,7 +6,7 @@ public class Parsing {
   private static int flag = 0; //Флаг указывает какие конкретно. 0 арабские. 1 римские.
   private static String operator;
 
-  public static void process(String input) {
+  public static void process(String input) throws Exception {
     // делим входную строку на числа
     String[] num = input.split("[+\\-/*]");
     for (int i = 0; i < num.length; i++) {
@@ -15,8 +15,7 @@ public class Parsing {
 
     //Проверяем, что у нас всего два операнда
     if (num.length != 2) {
-      System.out.println("Должно быть два операнда.");
-      System.exit(0);
+      throw new Exception("Должно быть два операнда.");
     }
 
     operator = detectOperation(input);
@@ -45,24 +44,21 @@ public class Parsing {
     return null;
   }
 
-  private static void variationExpression(String[] num) {
+  private static void variationExpression(String[] num) throws Exception {
     boolean b = num[0].matches("[0-9]") && num[1].matches("[IVXLCD]");
     boolean a = num[0].matches("[IVXLCD]") && num[1].matches("[0-9]");
     if (a || b) {
-      System.out.println("Не допустимое выражение.");
-      System.exit(0);
+      throw new Exception("Не допустимое выражение.");
     }
 
   }
 
-  private static void variationNumbers() {
+  private static void variationNumbers() throws Exception {
     if (num1 < 1 || num1 > 10 || num2 < 1 || num2 > 10) {
-      System.out.println("Числа только от 1 до 10.");
-      System.exit(0);
+      throw new Exception("Числа только от 1 до 10.");
     }
     if (flag == 1 && ((num1 < num2) && Objects.equals(operator, "-"))) {
-        System.out.println("В римской системе нет отрицательных чисел.");
-        System.exit(0);
+      throw new Exception("В римской системе нет отрицательных чисел.");
     }
   }
 }
